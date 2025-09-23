@@ -6,13 +6,13 @@ export default function QuestionTimer({ timeOut, onTimeout }) {
     useEffect(() => { 
         setTimeout(onTimeout, timeOut);
      }, [timeOut, onTimeout]);
-
-    
-
+     
     useEffect(() => {
-     setInterval(() => {
+     var interval = setInterval(() => {
         setTimeLeft(timeLeft => timeLeft - 100);
-    }, 100);}, []);
+    }, 100);
+        return () => clearInterval(interval);
+    }, []);
     
     return <progress id="question-time" max={timeOut} value={timeLeft} ></progress>;
 }
